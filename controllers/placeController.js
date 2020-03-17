@@ -2,9 +2,14 @@ const { query } = require('../util/dbconfig.js')
 
 // 获取滑板场地list
 async function getPlaceList (req, res) {
-  const sql = 'select * from place'
-  let msg = await query(sql)
-  res.json(msg)
+  // 先查出所有的场地
+  let placeListRes = await query('select * from place')
+  // 循环场地列表，根据每个场地id去图片表查出它的图片
+  for(const item of placeListRes) {
+    let imgListRes = await query(`select * from image where place_id = ${item.id}`)
+    item.imgList = imgListRes || [];
+  }
+  res.json(placeListRes)
 }
 
 // 获取指定场地的评论
