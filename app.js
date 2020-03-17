@@ -1,11 +1,9 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-
-var router = require('./routes/index');
+var router = require('./routes/place');
 
 var app = express();
-
 var http = require('http');
 var server = http.createServer(app);
 
