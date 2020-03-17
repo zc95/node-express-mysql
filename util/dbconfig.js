@@ -1,7 +1,7 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
 // 数据库连接配置
-var pool = mysql.createPool({
+const pool = mysql.createPool({
   host: 'localhost',
   port: '3306',
   user: 'root',
