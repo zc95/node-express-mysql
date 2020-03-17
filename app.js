@@ -2,8 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var router = require('./routes/place');
-var router = require('./routes/user');
+var router = require('./routes/router');
 
 
 var app = express();
