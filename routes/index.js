@@ -1,5 +1,4 @@
 // index.js
-
 const express = require('express')
 const router = express.Router()
 const place = require("../controllers/placeController.js")

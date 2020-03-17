@@ -9,19 +9,24 @@ const pool = mysql.createPool({
   database: 'db_test'
 })
 
-// 对数据库进行增删改查操作的基础
-function query (sql, callback) {
-  pool.getConnection((err, conn) => {
-    if (err) {
-      console.log("连接数据库错误")
-      console.log(err)
-      return;
-    }
-    conn.query(sql, (err, rows) => {
-      callback(err, rows)
-      conn.release()
+let query = function( sql, values ) {
+  return new Promise(( resolve, reject ) => {
+    pool.getConnection(function(err, connection) {
+      if (err) {
+        reject( err )
+      } else {
+        connection.query(sql, values, ( err, rows) => {
+
+          if ( err ) {
+            reject( err )
+          } else {
+            resolve( rows )
+          }
+          connection.release()
+        })
+      }
     })
   })
 }
 
-exports.query = query
+module.exports = { query }

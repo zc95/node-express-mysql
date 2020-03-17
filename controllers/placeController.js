@@ -1,29 +1,21 @@
-const db = require('../util/dbconfig.js')
+const { query } = require('../util/dbconfig.js')
 
 // 获取滑板场地list
-getPlaceList = (req, res) => {
+async function getPlaceList (req, res) {
   const sql = 'select * from place'
-  db.query(sql, (err, result) => {
-    if (err) {
-      return
-    }
-    res.json(result)
-  });
+  let msg = await query(sql)
+  res.json(msg)
 }
 
 // 获取指定场地的评论
-getComment = (req, res) => {
+async function getComment (req, res) {
   let {placeId} = req.query
   let sql = 'select * from comment'
   if(placeId) {
     sql += ` where place_id = ${placeId}`
   }
-  db.query(sql, (err, result) => {
-    if (err) {
-      return
-    }
-    res.json(result)
-  });
+  let msg = await query(sql)
+  res.json(msg)
 }
 
 module.exports = {
