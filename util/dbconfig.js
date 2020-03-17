@@ -10,14 +10,15 @@ const pool = mysql.createPool({
 })
 
 // 连接数据库并查询
-let query = function (sql, values) {
+let query = function (sql, params) {
   return new Promise((resolve, reject) => {
     pool.getConnection(function (err, connection) {
       if (err) {
         console.log('数据库连接异常')
         reject(err)
       } else {
-        connection.query(sql, values, (err, rows) => {
+        connection.query(sql, params, (err, rows) => {
+          connection.release()
           if (err) {
             console.log('数据库操作异常')
             reject(err)
@@ -25,7 +26,6 @@ let query = function (sql, values) {
             console.log('数据库操作成功')
             resolve(rows)
           }
-          connection.release()
         })
       }
     })
