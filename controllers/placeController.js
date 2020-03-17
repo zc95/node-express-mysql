@@ -7,7 +7,7 @@ getPlaceList = (req, res) => {
     if (err) {
       return
     }
-    res.send(result)
+    res.json(result)
   });
 }
 
@@ -22,7 +22,7 @@ getComment = (req, res) => {
     if (err) {
       return
     }
-    res.send(result)
+    res.json(result)
   });
 }
 
