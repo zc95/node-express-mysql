@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-// 数据库连接配置
+// 新建mysql连接池
 const pool = mysql.createPool({
   host: 'localhost',
   port: '3306',
@@ -9,6 +9,7 @@ const pool = mysql.createPool({
   database: 'db_test'
 })
 
+// 连接数据库并查询
 let query = function( sql, values ) {
   return new Promise(( resolve, reject ) => {
     pool.getConnection(function(err, connection) {
@@ -16,7 +17,6 @@ let query = function( sql, values ) {
         reject( err )
       } else {
         connection.query(sql, values, ( err, rows) => {
-
           if ( err ) {
             reject( err )
           } else {
