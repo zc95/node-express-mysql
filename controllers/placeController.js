@@ -9,10 +9,7 @@ async function getPlaceList (req, res) {
     let imgListRes = await query(`SELECT * FROM image WHERE place_id = ${item.id}`)
     item.imgList = imgListRes || [];
   }
-  res.json({
-    code: 200,
-    data: result
-  })
+  res.json(result)
 }
 
 // 获取指定场地的评论
@@ -31,10 +28,7 @@ async function getComment (req, res) {
     sql += ` WHERE place_id = ${placeId}`
   }
   let result = await query(sql)
-  res.json({
-    code: 200,
-    data: result
-  })
+  res.json(result)
 }
 
 // 删除场地
